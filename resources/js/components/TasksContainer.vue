@@ -9,8 +9,7 @@ const selectedTask = ref(null)
 const taskStore = useTaskStore()
 
 function openModal(task = null) {
-  console.log('openModal chamado') // Testa se chegou aqui
-  selectedTask.value = task
+  selectedTask.value = task ? { ...task } : null // evita reatividade residual
   showModal.value = true
 }
 
@@ -25,6 +24,24 @@ async function saveTask(payload) {
   } else {
     await taskStore.createTask(payload)
   }
+  closeModal()
+}
+
+async function handleDeleteTask(taskId) {
+  try {
+    taskStore.loading = true
+    await taskStore.deleteTask(taskId)
+    await taskStore.fetchTasks()
+  } catch (err) {
+    alert('Erro ao excluir a tarefa. Tente novamente.')
+    console.error(err)
+  } finally {
+    taskStore.loading = false
+  }
+}
+
+async function handleToggleComplete(task) {
+  await taskStore.toggleTask(task.id)
 }
 
 defineExpose({ openModal })
@@ -38,7 +55,8 @@ onMounted(() => {
   <TaskList
     :tasks="taskStore.tasks"
     @edit="openModal"
-    @deleted="taskStore.fetchTasks"
+    @deleted="handleDeleteTask"
+    @toggleComplete="handleToggleComplete"
   />
 
   <TaskModal

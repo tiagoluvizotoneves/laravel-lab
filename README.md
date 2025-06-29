@@ -6,7 +6,6 @@ Este projeto é a implementação do teste técnico da Alloy, utilizando:
 - Vue.js 3.4
 - Vite 6.3
 - Pinia 2.1
-- TailwindCSS 4.0
 
 ---
 
@@ -14,8 +13,6 @@ Este projeto é a implementação do teste técnico da Alloy, utilizando:
 
 - CRUD completo de tarefas
 - Modal para criação e edição
-- Layout 100% fiel ao Webflow
-- Botões de editar e excluir visíveis
 - Cache e job de exclusão assíncrono
 - Código limpo, comentado e pronto para produção
 
@@ -25,8 +22,8 @@ Este projeto é a implementação do teste técnico da Alloy, utilizando:
 
 ### Backend (Laravel)
 ```bash
-git clone https://github.com/seu-usuario/alloy-test.git
-cd alloy-test
+git clone https://bitbucket.org/tlndesign/alloytestelaravel_tiago/
+cd alloytestelaravel_tiago
 
 cp .env.example .env
 composer install
@@ -47,10 +44,11 @@ npm run dev
 ```bash
 ├── app/
 │   └── Http/Controllers/TaskController.php
+│   └── Jobs/DeleteCompletedTask.php
+│   └── Models/Task.php
 │
 ├── database/
-│   └── migrations/
-│   └── seeders/
+│   └── migrations/2025_06_28_125519_create_tasks_table.php
 │
 ├── resources/
 │   └── js/

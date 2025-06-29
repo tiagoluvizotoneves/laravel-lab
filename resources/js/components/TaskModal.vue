@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { watch, reactive } from 'vue'
+import { reactive, toRef, watchEffect } from 'vue'
 
 const props = defineProps({
   show: Boolean,
@@ -70,22 +70,29 @@ const form = reactive({
   finalizado: false
 })
 
-watch(
-  () => props.task,
-  (newTask) => {
-    form.nome = newTask?.nome || ''
-    form.descricao = newTask?.descricao || ''
-    form.data_limite = newTask?.data_limite || ''
-    form.finalizado = newTask?.finalizado || false
-  },
-  { immediate: true }
-)
+function formatDateToInput(dateStr) {
+  if (!dateStr) return ''
+  const date = new Date(dateStr)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+// Sempre que o modal abrir, configura o formulário
+watchEffect(() => {
+  if (props.show) {
+    form.nome = props.task?.nome || ''
+    form.descricao = props.task?.descricao || ''
+    form.data_limite = formatDateToInput(props.task?.data_limite)
+    form.finalizado = !!props.task?.finalizado
+  }
+})
 
 function save() {
-  const payload = {
+  emit('save', {
     ...props.task,
     ...form
-  }
-  emit('save', payload)
+  })
 }
 </script>

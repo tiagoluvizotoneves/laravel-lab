@@ -38,13 +38,15 @@ class TaskController extends Controller
             'data_limite' => 'nullable|date',
         ]);
 
+        if (!empty($validated['data_limite'])) {
+            $validated['data_limite'] = \Carbon\Carbon::createFromFormat('Y-m-d', $validated['data_limite'], 'America/Sao_Paulo')->startOfDay();
+        }
+
         $task = Task::create($validated);
 
-        // Limpa cache relacionado
         Cache::forget('tasks.all');
         Cache::forget("task.{$task->id}");
 
-        // Dispara job se tarefa já estiver finalizada
         if ($task->finalizado) {
             DeleteCompletedTask::dispatch($task)->delay(now()->addMinutes(10));
         }
@@ -62,7 +64,7 @@ class TaskController extends Controller
     {
         $cacheKey = "task.{$task->id}";
 
-        $cachedTask = Cache::remember($cacheKey, 60, fn () => $task);
+        $cachedTask = Cache::remember($cacheKey, 60, fn() => $task);
 
         return response()->json($cachedTask);
     }
@@ -80,9 +82,12 @@ class TaskController extends Controller
             'data_limite' => 'nullable|date',
         ]);
 
+        if (!empty($validated['data_limite'])) {
+            $validated['data_limite'] = \Carbon\Carbon::createFromFormat('Y-m-d', $validated['data_limite'], 'America/Sao_Paulo')->startOfDay();
+        }
+
         $task->update($validated);
 
-        // Invalida caches relacionados
         Cache::forget('tasks.all');
         Cache::forget("task.{$task->id}");
 
