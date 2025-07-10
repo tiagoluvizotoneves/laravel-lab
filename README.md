@@ -1,6 +1,6 @@
-# Alloy Technical Test - Task Management App
+# Technical Test - Task Management App
 
-Este projeto é a implementação do teste técnico da Alloy, utilizando:
+Este projeto é a implementação do teste técnico, utilizando:
 
 -   Laravel 12.x (PHP 8.2+)
 -   Vue.js 3.4
@@ -23,8 +23,8 @@ Este projeto é a implementação do teste técnico da Alloy, utilizando:
 ### Backend (Laravel)
 
 ```bash
-git clone https://bitbucket.org/tlndesign/alloytestelaravel_tiago/
-cd alloytestelaravel_tiago
+git clone https://github.com/tiagoluvizotoneves/laravel-lab.git
+cd laravel-lab
 
 cp .env.example .env
 composer install

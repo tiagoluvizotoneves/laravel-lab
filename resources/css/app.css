@@ -1,6 +1,6 @@
 @import "./normalize.css";
 @import "./webflow.css";
-@import "./alloy-tests.webflow.css";
+@import "./tests.webflow.css";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';

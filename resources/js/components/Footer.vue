@@ -1,9 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
     <div class="footer">
-      <div>Alloy</div>
+        <div>Technical Test</div>
     </div>
 </template>
