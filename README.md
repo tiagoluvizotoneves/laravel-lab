@@ -1,20 +1,22 @@
-# Technical Test - Task Management App
+# Laravel Lab – Technical Test - Task Management App
 
 Este projeto é a implementação do teste técnico, utilizando:
 
 -   Laravel 12.x (PHP 8.2+)
--   Vue.js 3.4
--   Vite 6.3
+-   Vue.js 3.4 + Vite 6.3
 -   Pinia 2.1
+-   TailwindCSS 4
+-   Jobs assíncronos, cache e boas práticas
 
 ---
 
 ## Funcionalidades
 
--   CRUD completo de tarefas
--   Modal para criação e edição
--   Cache e job de exclusão assíncrono
--   Código limpo, comentado e pronto para produção
+-   CRUD completo de tarefas com validação (frontend + backend)
+-   Modal para criação e edição (UX fluida)
+-   Exclusão lógica e job assíncrono para limpeza automática
+-   Cache da listagem com invalidação automática
+-   Testes automatizados (Feature + Factory)
 
 ---
 
@@ -70,6 +72,20 @@ npm run dev
 └── README.md
 ```
 
+### Testes
+
+```bash
+php artisan test
+```
+
+Cobertura:
+
+-   Criação de tarefas
+-   Listagem e edição
+-   Marcar como finalizada
+-   Soft delete com validação
+-   Verificação em banco com assertDatabaseHas e assertSoftDeleted
+
 ### Deploy
 
 Pronto para rodar em ambiente local (http://127.0.0.1:8000) com build automatizado via Vite:
@@ -82,4 +98,5 @@ php artisan serve (terminal 2)
 ### Desenvolvimento
 
 Tiago Luvizoto Neves
+Desenvolvedor Full Stack | Laravel | Vue.js | WordPress | UX/UI
 LinkedIn: https://www.linkedin.com/in/tiagoluvizotoneves/
